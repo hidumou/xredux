@@ -1,0 +1,12 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "overrides": [
+    {
+      "files": "test/**/*.js",
+      "env": {
+        "jest": true
+      },
+    }
+  ]
+}

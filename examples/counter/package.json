@@ -1,0 +1,41 @@
+{
+  "name": "counter",
+  "version": "1.0.0",
+  "engines": {
+    "npm": ">=8.9.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-redux": "^5.0.7",
+    "xredux": "^0.0.1"
+  },
+  "devDependencies": {
+    "@ris/eslint-config": "^0.0.1",
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.19.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "stylelint": "^8.4.0",
+    "stylelint-config-standard": "^18.0.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "start": "ris dev",
+    "add": "ris add",
+    "build": "ris build",
+    "lint": "eslint --ext .js src",
+    "lint:fix": "npm run lint --fix",
+    "stylelint": "stylelint \"src/**/*.{css,less,styl,scss,sass,sss}\"",
+    "stylelint:fix": "npm run stylelint --fix",
+    "precommit": "lint-staged"
+  },
+  "author": "beyondxgb",
+  "description": "A React App Project"
+}
