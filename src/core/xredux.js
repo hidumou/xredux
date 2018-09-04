@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import createStore from './createStore';
 import reducerHelper from './reducer';
 import actionHelper from './action';
@@ -53,16 +54,21 @@ export default class XRedux {
     this.createStore = this.createStore.bind(this);
     this.model = this.model.bind(this);
   }
-  createStore(reducer, initialState = {}, externalMiddlewares) {
+  createStore(reducers = {}, initialState = {}, externalMiddlewares) {
     if (externalMiddlewares && !isArray(externalMiddlewares)) {
       throw new Error(`Expected the middlewares to be a array, but got ${typeof externalMiddlewares}`);
     }
     // create store
-    const store = createStore.call(this, reducer, initialState, externalMiddlewares);
+    const store = createStore.call(
+      this,
+      combineReducers(reducers),
+      initialState,
+      externalMiddlewares,
+    );
     // init reducer
-    if (reducer) {
+    if (reducers) {
       this.reducers = {
-        ...reducer,
+        ...reducers,
       };
     }
     // save store
