@@ -1,5 +1,4 @@
 import constants from './constants';
-// import isPlainObject from 'is-plain-object';
 
 const { SEP } = constants;
 

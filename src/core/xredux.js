@@ -2,7 +2,10 @@ import { combineReducers } from 'redux';
 import createStore from './createStore';
 import reducerHelper from './reducer';
 import actionHelper from './action';
+import constants from '../constants';
 import { prefixNamespace, isArray, isPlainObject } from '../utils';
+
+const { SET_STATE } = constants;
 
 const { getReducer, createReducer } = reducerHelper;
 
@@ -54,9 +57,12 @@ export default class XRedux {
     this.createStore = this.createStore.bind(this);
     this.model = this.model.bind(this);
   }
-  createStore(reducers = {}, initialState = {}, externalMiddlewares) {
+  createStore(reducers = {}, initialState = {}, externalMiddlewares, models = []) {
     if (externalMiddlewares && !isArray(externalMiddlewares)) {
       throw new Error(`Expected the middlewares to be a array, but got ${typeof externalMiddlewares}`);
+    }
+    if (models && !isArray(models)) {
+      throw new Error(`Expected the models to be a array, but got ${typeof models}`);
     }
     // create store
     const store = createStore.call(
@@ -74,45 +80,66 @@ export default class XRedux {
     // save store
     this.store = store;
     // init models
+    if (models.length > 0) {
+      this.addModels(models);
+    }
+    // init memory models
     if (this.MEMORY_MODELS.length > 0) {
-      for (let i = 0; i < this.MEMORY_MODELS.length; i += 1) {
-        this.model(this.MEMORY_MODELS[i]);
-      }
+      this.addModels(this.MEMORY_MODELS);
       this.MEMORY_MODELS = [];
     }
     return store;
+  }
+  addModels(models) {
+    if (models && !isArray(models)) {
+      throw new Error(`Expected the models to be a array, but got ${typeof models}`);
+    }
+    for (let i = 0; i < models.length; i += 1) {
+      const m = models[i];
+      const model = validateModel(m, this.models);
+      const { namespace } = model;
+
+      if (Object.keys(model.reducers).indexOf(SET_STATE) === -1) {
+        // inject setState reducer to reducers
+        // it can help to set state quickly in the effects
+        model.reducers[SET_STATE] = (state, action) => ({
+          ...state,
+          ...action.payload,
+        });
+      }
+
+      // prefix namespace to reducers and effects
+      const reducers = prefixNamespace(namespace, model.reducers);
+      const effects = prefixNamespace(namespace, model.effects);
+
+      // inject reducer
+      const finalReducer = getReducer(reducers, model.initialState);
+      this.reducers[namespace] = finalReducer;
+
+      // add effects
+      this.effects = {
+        ...this.effects,
+        ...effects,
+      };
+
+      // add actions
+      const actions = actionHelper.add(model, this.store.dispatch, this.actions);
+      this.actions[namespace] = {
+        ...this.actions,
+        ...actions,
+      };
+
+      // save model
+      this.models.push(model);
+    }
+    // update reducer in the store
+    this.store.replaceReducer(createReducer(this.reducers));
   }
   model(m) {
     if (!this.store) {
       this.MEMORY_MODELS.push(m);
       return;
     }
-    const model = validateModel(m, this.models);
-    const { namespace } = model;
-    const reducers = prefixNamespace(namespace, model.reducers);
-    const effects = prefixNamespace(namespace, model.effects);
-
-    // inject reducer
-    const finalReducer = getReducer(reducers, model.initialState);
-    this.reducers[namespace] = finalReducer;
-
-    // update reducer in the store
-    this.store.replaceReducer(createReducer(this.reducers));
-
-    // add effects
-    this.effects = {
-      ...this.effects,
-      ...effects,
-    };
-
-    // add actions
-    const actions = actionHelper.add(model, this.store.dispatch, this.actions);
-    this.actions[namespace] = {
-      ...this.actions,
-      ...actions,
-    };
-
-    // save model
-    this.models.push(model);
+    this.addModels([m]);
   }
 }

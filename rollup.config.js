@@ -11,7 +11,7 @@ const config = {
 
 if (env === 'es' || env === 'cjs') {
   config.output = { format: env }
-  config.external = ['symbol-observable']
+  config.external = ['is-plain-object', 'redux']
   config.plugins.push(
     babel({
       plugins: ['external-helpers'],
@@ -20,7 +20,7 @@ if (env === 'es' || env === 'cjs') {
 }
 
 if (env === 'development' || env === 'production') {
-  config.output = { format: 'umd', name: 'Redux' }
+  config.output = { format: 'umd', name: 'XRedux' }
   config.plugins.push(
     nodeResolve({
       jsnext: true
