@@ -57,12 +57,9 @@ export default class XRedux {
     this.createStore = this.createStore.bind(this);
     this.model = this.model.bind(this);
   }
-  createStore(reducers = {}, initialState = {}, externalMiddlewares, models = []) {
+  createStore(reducers = {}, initialState = {}, externalMiddlewares) {
     if (externalMiddlewares && !isArray(externalMiddlewares)) {
       throw new Error(`Expected the middlewares to be a array, but got ${typeof externalMiddlewares}`);
-    }
-    if (models && !isArray(models)) {
-      throw new Error(`Expected the models to be a array, but got ${typeof models}`);
     }
     // create store
     const store = createStore.call(
@@ -79,10 +76,6 @@ export default class XRedux {
     }
     // save store
     this.store = store;
-    // init models
-    if (models.length > 0) {
-      this.addModels(models);
-    }
     // init memory models
     if (this.MEMORY_MODELS.length > 0) {
       this.addModels(this.MEMORY_MODELS);
