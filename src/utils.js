@@ -11,5 +11,5 @@ export function prefixNamespace(namespace, items = {}) {
 
 export const isArray = Array.isArray.bind(Array);
 
-export const isPlainObject = require('is-plain-object');
+export const isPlainObject = require('is-plain-object'); // eslint-disable-line
 

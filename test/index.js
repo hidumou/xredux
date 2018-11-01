@@ -2,7 +2,7 @@ const xredux = require('../lib/xredux');
 // import xredux from '../lib/xredux';
 
 function sleep() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
     }, 3000);
@@ -19,13 +19,12 @@ xredux.model({
     count: 1,
   },
   reducers: {
-    add(state, action) {
-      console.log(action);
+    add(state) {
       return {
         ...state,
         count: state.count + 1,
-      }
-    }
+      };
+    },
   },
   effects: {
     async fetch(action, dispatch, getState) {
@@ -35,17 +34,15 @@ xredux.model({
       console.log(getState());
       // dispatch({ type: 'index/add' });
       // console.log(getState());
-    }
-  }
+    },
+  },
 });
 
 console.log(store.getState());
-const actions = xredux.actions;
+const { actions } = xredux.actions;
 console.log('actions: ', actions);
 actions.index.fetch({ id: 1 });
 // store.dispatch({ type: 'index/fetch'});
 console.log(store.getState());
 const { reducers, effects } = xredux;
 console.log(reducers, effects);
-
-

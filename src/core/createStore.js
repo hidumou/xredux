@@ -19,8 +19,8 @@ export default function (
   const composeEnhancers =
     process.env.NODE_ENV !== 'production' &&
     typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__         // eslint-disable-line
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({   // eslint-disable-line
         shouldHotReload: false,
       })
       : compose;
