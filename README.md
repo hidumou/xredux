@@ -1,19 +1,3 @@
-# XRedux
-An upgrade for redux. Inspired by [dva](https://github.com/dvajs/dva) and [mirrorx](https://github.com/mirrorjs/mirror).
-
-# Why XRedux
-XRedux is not a framework like dva and mirrorx. It's just a plain libray and it solves the two problems that redux brought about.
-  1. Following redux rules, we need create actions、reducers even more files. This will lead to mental leap.
-  2. Redux didn't solve the async action.
-
-So We need a higher abstraction. The above problems 
-
-
-# Installation
-```bash
-npm install --save xredux
-```
-
 # Usage
 
 ```js
@@ -23,17 +7,14 @@ import xredux from 'xredux';
 // Its API is the same as redux store, { subscribe, dispatch, getState }
 const store = xredux.createStore();
 
-// xredux.actions contain all actions in the store
+// xredux.actions contain all actions in the store.
 const actions = xredux.actions;
 
-/**
- * This is a model, a pure object with namespace, initialState, reducers, effects.
- * We
- */
+// This is a model, a pure object with namespace, initialState, reducers, effects.
 xredux.model({
-  namespace: 'app',
+  namespace: 'counter',
   initialState: {
-    count: 1,
+    count: 0,
   },
   reducers: {
     add(state, action) {
@@ -41,17 +22,35 @@ xredux.model({
         ...state,
         count: state.count + 1,
       }
+    },
+    plus(state, action) {
+      return {
+        ...state,
+        count: state.count - 1,
+      }
     }
   },
   effects: {
-    async addSync(action, dispatch, getState) {
+    async addASync(action, dispatch, getState) {
       await new Promise((resolve) => {
         setTimeout(() => {
           resolve();
         }, 1000);
       });
-      dispatch({ type: 'app/add' });
+      // dispatch action with xredux.actions
+      // you can aslo use `dispatch({ type: 'counter/add' })`
+      actions.counter.add();
     }
   }
 });
+store.subscribe(() => console.log(store.getState()));
+
+// dispatch action with xredux.actions
+// you can aslo use `dispatch({ type: 'counter/add' })`
+actions.counter.add(); // store.getState() => { counter: { count: 1 } }
+
+actions.counter.plus(); // store.getState() => { counter: { count: 0 } }
+
+// dispatch async action
+actions.counter.addASync(); // store.getState() => { counter: { count: 1 } }
 ```
