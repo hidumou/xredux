@@ -9,3 +9,4 @@ it('throws if middlewares is not a array', () => {
 
   expect(() => createStore(null, null, [])).not.toThrow();
 });
+
