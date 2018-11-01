@@ -1,4 +1,4 @@
 {
-  "presets": [],
+  "presets": ["@ris/babel-preset-react"],
   "plugins": []
 }

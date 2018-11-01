@@ -1,6 +1,6 @@
 {
   "name": "xredux",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "xredux",
   "main": "lib/xredux.js",
   "unpkg": "dist/xredux.js",

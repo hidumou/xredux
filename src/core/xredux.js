@@ -57,14 +57,14 @@ export default class XRedux {
     this.createStore = this.createStore.bind(this);
     this.model = this.model.bind(this);
   }
-  createStore(reducers = {}, initialState = {}, externalMiddlewares) {
+  createStore(reducers, initialState = {}, externalMiddlewares) {
     if (externalMiddlewares && !isArray(externalMiddlewares)) {
       throw new Error(`Expected the middlewares to be a array, but got ${typeof externalMiddlewares}`);
     }
     // create store
     const store = createStore.call(
       this,
-      combineReducers(reducers),
+      reducers ? combineReducers(reducers) : undefined,
       initialState,
       externalMiddlewares,
     );
