@@ -1,11 +1,12 @@
 # XRedux
 An upgrade for redux. Inspired by [dva](https://github.com/dvajs/dva) and [mirrorx](https://github.com/mirrorjs/mirror).
 
-XRedux is not a framework like dva and mirrorx. It's just a plain libray and it solves the two problems that redux brought about.
+XRedux is not a framework like `dva` and `mirrorx`. It's just a plain libray and it solves the two problems that redux brought about.
+  
   1. Following redux rules, we need create actions、reducers even more files. This will lead to mental leap.
   2. Redux didn't solve the async action.
 
-So We need a higher abstraction. There are already better solutions to these two problems. Such as dva propose model concept to solve the problems which we should create many files. For the async action problem, dva use saga and mirror use redux-thunk. I think redux-thunk is better which we can use async/await to write code. So XRedux is a libray combining the two ideas. It's just a plain libray the same as redux. It can use in any framework.
+So We need a higher abstraction. There are already better solutions to these two problems. Such as `dva` propose model concept to solve the problems which we should create many files. For the async action problem, dva use [saga](https://github.com/redux-saga/redux-saga) and `mirrorx` use [redux-thunk](https://github.com/reduxjs/redux-thunk). I think `redux-thunk` is better which we can use async/await to write code. So XRedux is a libray combining the two ideas. It's just a plain libray the same as `redux`. It can use in any framework.
 
 
 # Installation
@@ -71,6 +72,6 @@ actions.counter.plus(); // store.getState() => { counter: { count: 0 } }
 actions.counter.addASync(); // store.getState() => { counter: { count: 1 } }
 ```
 
-# Demo
-[Counter](https://codesandbox.io/s/n500m9qzjj)
-[Todo](https://codesandbox.io/s/mo680580px)
+# Examples
+* [Counter](https://codesandbox.io/s/n500m9qzjj)
+* [Todo](https://codesandbox.io/s/mo680580px)
