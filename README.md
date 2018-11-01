@@ -1,5 +1,6 @@
 # XRedux
-[![npm version](https://img.shields.io/npm/v/xredux.svg?colorB=007ec6&style=flat-square)](https://www.npmjs.com/package/xredux) [![license](https://img.shields.io/github/license/xredux/xredux.svg?style=flat-square)](https://github.com/beyondxgb/xredux/blob/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/xredux.svg?colorB=007ec6&style=flat-square)](https://www.npmjs.com/package/xredux) [![license](https://img.shields.io/github/license/beyondxgb/xredux.svg?style=flat-square)](https://github.com/beyondxgb/xredux/blob/master/LICENSE)
+
 An upgrade for redux. Inspired by [dva](https://github.com/dvajs/dva) and [mirrorx](https://github.com/mirrorjs/mirror).
 
 XRedux is not a framework like `dva` and `mirrorx`. It's just a plain libray and it solves the two problems that redux brought about.
