@@ -1,5 +1,8 @@
 # XRedux
-[![npm version](https://img.shields.io/npm/v/xredux.svg?colorB=007ec6&style=flat-square)](https://www.npmjs.com/package/xredux) [![license](https://img.shields.io/github/license/beyondxgb/xredux.svg?style=flat-square)](https://github.com/beyondxgb/xredux/blob/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/xredux.svg?colorB=007ec6&style=flat-square)](https://www.npmjs.com/package/xredux)
+[![build status](https://img.shields.io/travis/beyondxgb/xredux.svg?style=flat-square)](https://travis-ci.org/beyondxgb/xredux)
+[![coverage status](https://img.shields.io/coveralls/beyondxgb/xredux.svg?style=flat-square)]
+[![license](https://img.shields.io/github/license/beyondxgb/xredux.svg?style=flat-square)](https://github.com/beyondxgb/xredux/blob/master/LICENSE)
 
 An upgrade for redux. Inspired by [dva](https://github.com/dvajs/dva) and [mirrorx](https://github.com/mirrorjs/mirror).
 
