@@ -4,6 +4,10 @@ node_js:
 script:
   - npm run lint
   - npm run test:cov
+branches:
+  only:
+    - master
+    - next
 after_success:
   - npm run coveralls
 cache: yarn

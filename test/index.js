@@ -39,7 +39,7 @@ xredux.model({
 });
 
 console.log(store.getState());
-const { actions } = xredux.actions;
+const { actions } = xredux;
 console.log('actions: ', actions);
 actions.index.fetch({ id: 1 });
 // store.dispatch({ type: 'index/fetch'});
