@@ -16,6 +16,7 @@ export default function (
   ];
 
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
+  /* istanbul ignore next */
   const composeEnhancers =
     process.env.NODE_ENV !== 'production' &&
     typeof window === 'object' &&

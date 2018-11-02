@@ -12,12 +12,11 @@ function actionCreator(namespace, actionName, dispatch) {
 }
 
 export default {
-  add(model, dispatch, currentActions) {
+  add(model, dispatch) {
     const actions = {};
     const { reducers = {}, effects = {}, namespace } = model;
     const validate = (actionName) => {
-      if (actions[actionName] ||
-         (currentActions[namespace] && currentActions[namespace][actionName])) {
+      if (actions[actionName]) {
         throw new Error(`Action name "${namespace}${SEP}${actionName}" has been duplicate defined! Please select another action name!`);
       }
     };

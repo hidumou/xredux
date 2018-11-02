@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 export default {
-  getReducer(reducers = {}, initialState = null) {
+  getReducer(reducers, initialState = null) {
     return (state = initialState, action) => {
       if (typeof reducers[action.type] === 'function') {
         return reducers[action.type](state, action);
@@ -9,7 +9,7 @@ export default {
       return state;
     };
   },
-  createReducer(injectedReducers = {}) {
+  createReducer(injectedReducers) {
     return combineReducers({
       ...injectedReducers,
     });

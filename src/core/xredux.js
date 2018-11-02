@@ -42,7 +42,6 @@ function validateModel(model = {}, models) {
     namespace,
     reducers: filterReducers(reducers),
     effects: filterReducers(effects),
-    ...model,
   };
 }
 
@@ -57,7 +56,7 @@ export default class XRedux {
     this.createStore = this.createStore.bind(this);
     this.model = this.model.bind(this);
   }
-  createStore(reducers, initialState = {}, externalMiddlewares) {
+  createStore(reducers, initialState, externalMiddlewares) {
     if (externalMiddlewares && !isArray(externalMiddlewares)) {
       throw new Error(`Expected the middlewares to be a array, but got ${typeof externalMiddlewares}`);
     }
@@ -92,7 +91,7 @@ export default class XRedux {
       const model = validateModel(m, this.models);
       const { namespace } = model;
 
-      if (Object.keys(model.reducers).indexOf(SET_STATE) === -1) {
+      if (model.reducers && Object.keys(model.reducers).indexOf(SET_STATE) === -1) {
         // inject setState reducer to reducers
         // it can help to set state quickly in the effects
         model.reducers[SET_STATE] = (state, action) => ({
@@ -116,7 +115,7 @@ export default class XRedux {
       };
 
       // add actions
-      const actions = actionHelper.add(model, this.store.dispatch, this.actions);
+      const actions = actionHelper.add(model, this.store.dispatch);
       this.actions[namespace] = {
         ...this.actions,
         ...actions,
