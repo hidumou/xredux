@@ -22,28 +22,19 @@ it('should handle dispatch reducers action', () => {
   expect(state.app.count).toBe(1);
 });
 
-it('should handle dispatch setState action', () => {
-  const instance = xredux.create();
-  const store = instance.createStore();
-  instance.model({
-    namespace: 'app',
-    reducers: {
-    },
-  });
-  instance.actions.app.setState({ count: 1 });
-  const state = store.getState();
-  expect(state.app.count).toBe(1);
-});
-
 it('should handle dispatch effects action', async () => {
   const instance = xredux.create();
   const store = instance.createStore();
   instance.model({
     namespace: 'app',
+    initialState: {
+      count: 0,
+    },
     reducers: {
-      add() {
+      add(state) {
         return {
-          count: 1,
+          ...state,
+          count: state.count + 1,
         };
       },
     },

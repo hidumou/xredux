@@ -22,7 +22,7 @@ npm install --save xredux
 ## Usage
 
 ```js
-import xredux from 'xredux';
+import xredux from "xredux";
 
 // Create a Redux store holding the state of your app.
 // Its API is the same as redux store, { subscribe, dispatch, getState }
@@ -33,38 +33,38 @@ const actions = xredux.actions;
 
 // This is a model, a pure object with namespace, initialState, reducers, effects.
 xredux.model({
-  namespace: 'counter',
+  namespace: "counter",
   initialState: {
-    count: 0,
+    count: 0
   },
   reducers: {
     add(state, action) {
       return {
         ...state,
-        count: state.count + 1,
-      }
+        count: state.count + 1
+      };
     },
     plus(state, action) {
       return {
         ...state,
-        count: state.count - 1,
-      }
+        count: state.count - 1
+      };
     }
   },
   effects: {
-    async addASync(action, dispatch, getState) {
-      await new Promise((resolve) => {
+    async addAsync(action, dispatch, getState) {
+      await new Promise(resolve => {
         setTimeout(() => {
           resolve();
         }, 1000);
       });
       // Dispatch action with xredux.actions
       actions.counter.add();
-      
-      // You can aslo use dispatch action
-      // dispatch({ type: 'counter/add' });
-      
-      // You even can use built-in setState reducer
+
+      // You can aslo use `dispatch` action
+      // dispatch({ type: "counter/add" });
+
+      // You even can use built-in `setState` reducer
       // const { count } = getState().counter;
       // actions.counter.setState({ count: count + 1 });
     }
@@ -81,15 +81,16 @@ actions.counter.add(); // store.getState() => { counter: { count: 1 } }
 actions.counter.plus(); // store.getState() => { counter: { count: 0 } }
 
 // Dispatch async action
-actions.counter.addASync(); // store.getState() => { counter: { count: 1 } }
+actions.counter.addAsync(); // store.getState() => { counter: { count: 1 } }
 
-// You can aslo use dispatch action
+// You can aslo use `dispatch` action
 // dispatch({ type: [namespace]/[reducer] })
-dispatch({ type: 'counter/add' }); // store.getState() => { counter: { count: 2 } }
-dispatch({ type: 'counter/addAsync' }); // store.getState() => { counter: { count: 3 } }
+store.dispatch({ type: "counter/add" }); // store.getState() => { counter: { count: 2 } }
+store.dispatch({ type: "counter/addAsync" }); // store.getState() => { counter: { count: 3 } }
 ```
 
 ## Examples
+* [Plain](https://codesandbox.io/s/8pl0n4lzl8)
 * [Counter](https://codesandbox.io/s/n500m9qzjj)
 * [Todo](https://codesandbox.io/s/mo680580px)
 
