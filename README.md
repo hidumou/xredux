@@ -2,6 +2,7 @@
 [![npm version](https://img.shields.io/npm/v/xredux.svg?colorB=007ec6&style=flat-square)](https://www.npmjs.com/package/xredux)
 [![build status](https://img.shields.io/travis/beyondxgb/xredux.svg?style=flat-square)](https://travis-ci.org/beyondxgb/xredux)
 ![coverage status](https://img.shields.io/coveralls/beyondxgb/xredux.svg?style=flat-square)
+[![npm downloads](https://img.shields.io/npm/dm/xredux.svg?style=flat-square)](https://www.npmjs.com/package/xredux)
 [![license](https://img.shields.io/github/license/beyondxgb/xredux.svg?style=flat-square)](https://github.com/beyondxgb/xredux/blob/master/LICENSE)
 
 An upgrade for redux. Inspired by [dva](https://github.com/dvajs/dva) and [mirrorx](https://github.com/mirrorjs/mirror).
@@ -88,6 +89,14 @@ actions.counter.addAsync(); // store.getState() => { counter: { count: 1 } }
 store.dispatch({ type: "counter/add" }); // store.getState() => { counter: { count: 2 } }
 store.dispatch({ type: "counter/addAsync" }); // store.getState() => { counter: { count: 3 } }
 ```
+
+## Documentation
+* [Introduction](https://github.com/beyondxgb/xredux/blob/master/docs/introduction.md)
+* [Concept](https://github.com/beyondxgb/xredux/blob/master/docs/concept.md)
+* [Async Action](https://github.com/beyondxgb/xredux/blob/master/docs/async.md)
+* [API Reference](https://github.com/beyondxgb/xredux/blob/master/docs/api.md)
+* [FAQ](https://github.com/beyondxgb/xredux/blob/master/docs/FAQ.md)
+
 
 ## Examples
 * [Plain](https://codesandbox.io/s/8pl0n4lzl8)
