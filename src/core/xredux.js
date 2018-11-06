@@ -23,7 +23,9 @@ function filterReducers(reducers) {
 }
 
 function validateModel(model = {}, models) {
-  const { namespace, reducers, effects } = model;
+  const {
+    namespace, initialState, reducers, effects,
+  } = model;
   if (!namespace || typeof namespace !== 'string') {
     throw new Error(`Expected the model namespace to be a string. but got ${typeof namespace}`);
   }
@@ -40,6 +42,7 @@ function validateModel(model = {}, models) {
   }
   return {
     namespace,
+    initialState,
     reducers: filterReducers(reducers),
     effects: filterReducers(effects),
   };

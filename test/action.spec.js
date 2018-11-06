@@ -5,9 +5,15 @@ it('should handle dispatch reducers action', () => {
   const store = instance.createStore();
   instance.model({
     namespace: 'app',
+    initialState: {
+      count: 0,
+    },
     reducers: {
-      add() {
-        return { count: 1 };
+      add(state) {
+        return {
+          ...state,
+          count: state.count + 1,
+        };
       },
     },
   });
