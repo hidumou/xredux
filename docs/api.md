@@ -19,9 +19,17 @@ Create a store. It is similar to redux's createStore.
 const store = xredux.createStore();
 ```
 
-### `reducers`
+The `store` instance is the same as redux's store. So you can call such as `dispatch`, `getState` method.
 
-An object of function that you can define global reducers such as `routeReducer`, `languageReducer`.
+```js
+const store = xredux.createStore();
+store.getState(); // {}
+```
+
+### `reducers`
+Default: `undefined`
+
+An object of function that you can define global reducers such as `routeReducer`, `languageReducer`. The reducer must be standard Redux reducers.
 
 ```js
 import { LOCATION_CHANGE } from 'react-router-redux';
@@ -42,7 +50,9 @@ xredux.createStore({
   },
 });
 ```
-* `initialState`
+
+### `initialState`
+Default: `{}`
 
 The initial state for the application.
 
@@ -57,19 +67,133 @@ xredux.createStore({
 });
 ```
 
-* `externalMiddlewares`
+### `externalMiddlewares`
+Default: `[]`
+
+Specifies some third party middlewares. For example, you can add the `routerMiddleware` as the following:
+
+```js
+import { routerMiddleware } from 'react-router-redux';
+xredux.createStore(null, {}, [routerMiddleware]);
+```
+
+## xredux.model({ namespace, initialState, reducers, effects })
+
+The core method in xredux. We use model to converge initialState, action and reducer so we can only focus to model in development. **We make a deal that the action name is the reducer's function name**.
+
+### `namespace`
+
+To create a model, you should use a unique namespace to distinguish it. So that actions and reducers is in this namdspace. It must be provided and be a valid string.
+
+For example, we define a model named 'user',
+
+```js
+xredux.model({
+  namespace: 'user',
+});
+```
+
+`store.getState()` will like this:
+
+```js
+{
+  user: {},
+}
+```
+
+### `initialState`
+Default: `{}`
+
+The initial state for the model.
+
+For example, we define a model named 'user',
+
+```js
+xredux.model({
+  namespace: 'user',
+  initialState: {
+    userInfo: {
+      name: 'beyondxgb',
+    }
+  },
+});
+```
+
+`store.getState()` will like this:
+
+```js
+{
+  user: {
+    userInfo: {
+      name: 'beyondxgb',
+    },
+  },
+}
+```
+
+### `reducers`
+Default: `{}`
+
+Specifies the model's reducers. It must be standard redux reducer.
+
+For example, we define a model named 'user',
+
+```js
+xredux.model({
+  namespace: 'user',
+  initialState: {
+    userInfo: {
+      name: 'beyondxgb',
+    }
+  },
+  reducers: {
+    setUserInfo(state, action) {
+      return {
+        ...state,
+        userInfo: action.payload,
+      };
+    },
+  },
+});
+```
+
+We define a `setUserInfo` reducer and it in the `user` namespace.
+
+`xredux.reducers` will like this:
+
+```js
+{
+  user: {
+    setUserInfo: [Function]
+  }
+}
+```
+And Because **we make a deal that the action name is the reducer's function name**. So action will be created automatically.
+
+`xredux.actions` will aslo like this:
+
+```js
+{
+  user: {
+    setUserInfo: [Function]
+  }
+}
+```
+
+So we can call `setUserInfo` action as following:
+
+```js
+xredux.actions.user.setUserInfo({ name: 'arios' });
+```
+
+It aslo can be called use `store.dispatch`:
+
+```js
+store.dispatch('user/setUserInfo', { name: 'arios' });
+```
 
 
+### `effects`
 
-### xredux.model({ namespace, initialState, reducers, effects })
-This method is the core method. We use model to converge initialState, action and reducer so we can only focus to model in development. We make a deal that the action name is the reducer's function name.
-* `namespace`(String)
-To create a model, you should use a unique namespace to distinguish it. 
-* `initialState`(Any)
-
-* `reducers`(Object)
-
-* `effects`(Object)
-
-### xredux.actions
+## xredux.actions
 
