@@ -27,7 +27,7 @@ With `redux-thunk`, the action is not pure. And do async operation in the action
 
 In the `xredux`, we make the async action in the `effects`. So we can handle it correctly.
 
-```
+```js
 import xredux from 'xredux';
 
 const actions = xredux.actions;
@@ -73,7 +73,7 @@ function createEffectMiddleware(context) {
 export default createEffectMiddleware;
 ```
 
-Now, we solve the async action in a better way. But sometimes we will come across other problem.
+Now, we solve the async action in a better way. But sometimes we will come across other problems.
 
 For example, we fetch data from remote server:
 

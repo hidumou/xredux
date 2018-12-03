@@ -92,7 +92,6 @@ store.dispatch({ type: "counter/addAsync" }); // store.getState() => { counter: 
 
 ## Documentation
 * [Introduction](https://github.com/beyondxgb/xredux/blob/master/docs/introduction.md)
-* [Concept](https://github.com/beyondxgb/xredux/blob/master/docs/concept.md)
 * [Async Action](https://github.com/beyondxgb/xredux/blob/master/docs/async.md)
 * [API Reference](https://github.com/beyondxgb/xredux/blob/master/docs/api.md)
 * [FAQ](https://github.com/beyondxgb/xredux/blob/master/docs/FAQ.md)

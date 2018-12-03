@@ -9,9 +9,7 @@ XRedux is not a framework like `dva` and `mirrorx`. It's just a plain libray and
 
 For problem 1, dva propose model concept to solve the problems. We use model to converge initialState, action and reducer so we can only focus to model in development.
 
-For problem 2, we use redux-thunk built in to deal with async action. About async problem you can see [Async Action](./async.md);
+For problem 2, we use redux-thunk built in to deal with async action. About async problem you can see [Async Action](./async.md).
 
-Why we don't use dva or mirror directly ?
-
-[dva](https://github.com/dvajs/dva) or [mirror](https://github.com/mirrorjs/mirror) did provide good solution to solve this problems. But They has aslo react, react-router and other library built in. I think to solve the redux problem, we should only focus on data processing problem not provide a large and all inclusive solution. We should follow a single responsibility. So xredux only solves the problems that redux brought about. It can use in any framework without any dependence.
+Why we don't use dva or mirror directly ? [dva](https://github.com/dvajs/dva) or [mirror](https://github.com/mirrorjs/mirror) did provide good solution to solve this problems. But They has aslo react, react-router and other library built in. I think to solve the redux problem, we should only focus on data processing problem not provide a large and all inclusive solution. We should follow a single responsibility. So xredux only solves the problems that redux brought about. It can use in any framework without any dependence.
 
