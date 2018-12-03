@@ -1,14 +1,14 @@
 # API Reference
-* [xredux.createStore]
-  * [reducers]
-  * [initialState]
-  * [externalMiddlewares]
-* [xredux.model]
-  * [namespace]
-  * [initialState]
-  * [reducers]
-  * [effects]
-* [xredux.actions]
+* [xredux.createStore](#xreduxcreatestorereducers-initialstate-externalmiddlewares)
+  * [reducers](#reducers)
+  * [initialState](#initialstate)
+  * [externalMiddlewares](#externalmiddlewares)
+* [xredux.model](#xreduxmodel-namespace-initialstate-reducers-effects-)
+  * [namespace](#namespace)
+  * [initialState](#initialstate-1)
+  * [reducers](#reducers-1)
+  * [effects](#effects)
+* [xredux.actions](#xreduxactions)
 
 ## xredux.createStore(reducers, initialState, externalMiddlewares)
 Create a store. It is similar to redux's createStore.
@@ -279,6 +279,86 @@ xredux.actions.user.setUserInfoAsync();
 
 ## xredux.actions
 
+`xredux.actions` contain the whole actions in the store. The actions is created automatically when we define `reducers` and `effects`.
 
+The name of the actions is like `**[namespace]/[action name]**`.
+  * `namespace`: The model namespace. We distinguish action by namespace.
+  * `action name`: The action name is the `reducers` or `effects` function name that we define.
 
+For example, we define two models named `user` and `login`
 
+```js
+import xredux from 'xredux';
+
+const actions = xredux.actions;
+
+// user model
+xredux.model({
+  namespace: 'user',
+  initialState: {
+  },
+  reducers: {
+    setUserInfo(state, action) {
+      ...
+    },
+  },
+  effects: {
+    async setUserInfoAsync(action, dispatch, getState) {
+      ...
+    },
+  },
+});
+xredux.model({
+  namespace: 'login',
+  initialState: {
+  },
+  reducers: {
+    setLoginInfo(state, action) {
+      ...
+    },
+  },
+  effects: {
+    async getLoginInfoAsync(action, dispatch, getState) {
+      ...
+    },
+  },
+});
+```
+`xredux.actions` will be like this:
+
+```js
+{
+  user: {
+    setUserInfo: [Function],
+    setUserInfoAsync: [Function],
+  },
+  login: {
+    setLoginInfo: [Function],
+    getLoginInfoAsync: [Function],
+  },
+}
+```
+
+So we usually recommend call actions by `xredux.actions`
+
+```js
+import xredux from 'xredux';
+
+const actions = xredux.actions;
+
+actions.user.setUserInfo({ name: 'beyondxgb' });
+actions.user.getLoginInfoAsync();
+```
+
+But we also can call actions by `store.dispatch([action name], [payload])`,
+
+```js
+import xredux from 'xredux';
+
+const store = xredux.createStore();
+store.model({
+  // user model
+  ...
+})；
+store.dispatch('user/setUserInfo', { name: 'beyondxgb' });
+```
