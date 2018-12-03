@@ -31,7 +31,7 @@ store.getState();
 ### `reducers`
 Default: `undefined`
 
-An object of function that you can define global reducers such as `routeReducer`, `languageReducer`. The reducer must be standard Redux reducers.
+An object of function that you can define global reducers such as `routeReducer`, `languageReducer`. The reducer must be standard redux reducers.
 
 ```js
 import xredux from 'xredux';
@@ -79,6 +79,7 @@ Default: `[]`
 Specifies some third party middlewares. For example, you can add the `routerMiddleware` as the following:
 
 ```js
+import xredux from 'xredux';
 import { routerMiddleware } from 'react-router-redux';
 xredux.createStore(null, {}, [routerMiddleware]);
 ```
@@ -89,7 +90,7 @@ The core method in xredux. We use model to converge initialState, action and red
 
 ### `namespace`
 
-To create a model, you should use a unique namespace to distinguish it. So that actions and reducers is in this namdspace. It must be provided and be a valid string.
+To create a model, you should use a unique namespace to distinguish it. So that actions and reducers is in this namespace. It must be provided and be a valid string.
 
 For example, we define a model named 'user',
 
@@ -122,7 +123,7 @@ xredux.model({
   initialState: {
     userInfo: {
       name: 'beyondxgb',
-    }
+    },
   },
 });
 ```
@@ -347,7 +348,7 @@ import xredux from 'xredux';
 const actions = xredux.actions;
 
 actions.user.setUserInfo({ name: 'beyondxgb' });
-actions.user.getLoginInfoAsync();
+actions.login.getLoginInfoAsync();
 ```
 
 But we also can call actions by `store.dispatch([action name], [payload])`,
