@@ -1,0 +1,27 @@
+/**
+ *
+ * {{properCase name }}
+ *
+ */
+
+import React from 'react';
+import { connect } from 'react-redux';
+import xredux from 'xredux';
+import './model.js';
+import './index.scss';
+
+// xredux.actions contain all actions in the store
+const actions = xredux.actions.{{ camelCase name }};
+
+const mapStateToProps = ({ {{ camelCase name }} }) => ({
+});
+
+function {{ properCase name }}() {
+  return (
+    <div className="{{ dashCase name}}-container">
+      {{ properCase name}}Container
+    </div>
+  );
+}
+
+export default connect(mapStateToProps)({{ properCase name }});

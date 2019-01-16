@@ -1,0 +1,23 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import xredux from 'xredux';
+import './model.js';
+import './index.scss';
+
+// Page actions
+const actions = xredux.actions.{{ camelCase name }};
+
+// Get state from store
+const mapStateToProps = ({ {{ camelCase name }} }) => ({
+});
+
+@connect(mapStateToProps)
+export default class {{ properCase name }} extends {{{ type }}} {
+  render() {
+    return (
+      <div className="{{ dashCase name}}-container">
+        {{ properCase name}}Container
+      </div>
+    );
+  }
+}

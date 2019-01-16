@@ -119,10 +119,7 @@ export default class XRedux {
 
       // add actions
       const actions = actionHelper.add(model, this.store.dispatch);
-      this.actions[namespace] = {
-        ...this.actions,
-        ...actions,
-      };
+      this.actions[namespace] = actions;
 
       // save model
       this.models.push(model);

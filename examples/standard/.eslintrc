@@ -1,0 +1,19 @@
+{
+  "extends": "@ris/eslint-config/react",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true,
+    "es6": true
+  },
+  "rules": {
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./tools/webpack/base.js"
+      }
+    }
+  }
+}
