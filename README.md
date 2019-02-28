@@ -101,7 +101,7 @@ store.dispatch({ type: "counter/addAsync" }); // store.getState() => { counter: 
 * [Plain](https://codesandbox.io/s/8pl0n4lzl8)
 * [Counter](https://codesandbox.io/s/n500m9qzjj)
 * [Todo](https://codesandbox.io/s/mo680580px)
-* [Standard](https://github.com/beyondxgb/xredux/tree/master/examples/Standard)
+* [Standard](https://github.com/risjs/create-ris/tree/master/template/standard)
 
 ## License
 
